@@ -19,10 +19,8 @@ class Header:
 
 def encode_in_pixel(byte, pixel):
     """Encodes a byte in the two least significant bits of each channel.
-
     A 4-channel pixel is needed, which should be a tuple of 4 values from 0 to
     255.
-
     """
     r = (byte&3)
     g = (byte&12)>>2
@@ -37,7 +35,6 @@ def encode_in_pixel(byte, pixel):
 
 def decode_from_pixel(pixel):
     """Retrieves an encoded byte from the pixel.
-
     The pixel should be a tuple of 4 values from 0 to 255.
     """
     r = pixel[0]&3
@@ -137,7 +134,7 @@ def decode(image, password=""):
         print "There is no data to recover, quitting"
         exit()
 
-    data = data[4+Header.MAX_FORMAT_LENGTH:4+Header.MAX_FORMAT_LENGTH+header.size]
+    data = data[4+4+Header.MAX_FORMAT_LENGTH:4+4+Header.MAX_FORMAT_LENGTH+header.size]
 
     print "Saving decoded output as {}"\
         .format("output"+os.extsep+header.fformat)
@@ -146,7 +143,6 @@ def decode(image, password=""):
 
 def encrypt(data, password, padding=0):
     """Encrypts data using the password.
-
     Encrypts the data using the provided password using the cryptography module.
     The password is converted into a base64-encoded key which is then used in a
     symmetric encryption algorithm.
@@ -185,7 +181,6 @@ You can store 1 byte per pixel."
 
 def decrypt(data, password):
     """Decrypts data using the password.
-
     Decrypts the data using the provided password using the cryptography module.
     If the pasword or data is incorrect this will return None. 
     """
